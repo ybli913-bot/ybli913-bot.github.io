@@ -5,529 +5,133 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Soundcore 支持 - 产品手册 (云端同步版)</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
-            color: #333;
-            background-color: #f5f7fa;
-            line-height: 1.6;
+            color: #333; background-color: #f5f7fa; line-height: 1.6;
         }
-
         /* 顶部编辑工具栏 */
         .edit-toolbar {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 12px 24px;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
-            position: sticky;
-            top: 0;
-            z-index: 2000;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            flex-wrap: wrap;
+            padding: 12px 24px; box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+            position: sticky; top: 0; z-index: 2000;
+            display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
         }
-
         .edit-toolbar button {
-            background-color: rgba(255, 255, 255, 0.2);
-            color: #fff;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            padding: 8px 16px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 13px;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 6px;
+            background-color: rgba(255, 255, 255, 0.2); color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.3); padding: 8px 16px;
+            border-radius: 6px; cursor: pointer; font-size: 13px; transition: all 0.3s;
+            display: flex; align-items: center; gap: 6px;
         }
-
-        .edit-toolbar button:hover {
-            background-color: rgba(255, 255, 255, 0.3);
-            transform: translateY(-1px);
-        }
-
-        .edit-toolbar button:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
+        .edit-toolbar button:hover { background-color: rgba(255, 255, 255, 0.3); transform: translateY(-1px); }
+        .edit-toolbar button:disabled { opacity: 0.5; cursor: not-allowed; }
         .edit-toolbar .mode-indicator {
-            margin-left: auto;
-            color: #fff;
-            font-size: 13px;
-            padding: 8px 16px;
-            background-color: rgba(255, 255, 255, 0.2);
-            border-radius: 6px;
+            margin-left: auto; color: #fff; font-size: 13px;
+            padding: 8px 16px; background-color: rgba(255, 255, 255, 0.2); border-radius: 6px;
         }
-
-        .sync-status {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-
+        .sync-status { display: inline-flex; align-items: center; gap: 6px; }
         .sync-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background-color: #4ade80;
+            width: 8px; height: 8px; border-radius: 50%; background-color: #4ade80;
             animation: pulse 2s infinite;
         }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
 
         /* 头部导航 */
-        header {
-            background-color: #fff;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-            position: sticky;
-            top: 48px;
-            z-index: 1000;
-        }
-
-        .header-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 16px 32px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
+        header { background-color: #fff; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06); position: sticky; top: 48px; z-index: 1000; }
+        .header-container { max-width: 1400px; margin: 0 auto; padding: 16px 32px; display: flex; align-items: center; justify-content: space-between; }
+        .logo { display: flex; align-items: center; gap: 12px; }
         .logo-text {
-            font-size: 26px;
-            font-weight: 700;
+            font-size: 26px; font-weight: 700;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
         }
-
-        .logo-sub {
-            font-size: 13px;
-            color: #666;
-            font-weight: 400;
-        }
-
-        nav {
-            display: flex;
-            gap: 32px;
-        }
-
-        nav a {
-            color: #666;
-            text-decoration: none;
-            font-size: 14px;
-            transition: color 0.3s;
-            padding: 8px 12px;
-            border-radius: 4px;
-        }
-
-        nav a:hover {
-            color: #667eea;
-            background-color: #f5f7fa;
-        }
+        .logo-sub { font-size: 13px; color: #666; font-weight: 400; }
+        nav { display: flex; gap: 32px; }
+        nav a { color: #666; text-decoration: none; font-size: 14px; transition: color 0.3s; padding: 8px 12px; border-radius: 4px; }
+        nav a:hover { color: #667eea; background-color: #f5f7fa; }
 
         /* 主要内容区 */
-        .main-container {
-            max-width: 1400px;
-            margin: 32px auto;
-            padding: 0 32px;
-            display: grid;
-            grid-template-columns: 280px 1fr;
-            gap: 32px;
-        }
-
+        .main-container { max-width: 1400px; margin: 32px auto; padding: 0 32px; display: grid; grid-template-columns: 280px 1fr; gap: 32px; }
         /* 侧边栏 */
-        .sidebar {
-            background-color: #fff;
-            border-radius: 12px;
-            padding: 24px;
-            height: fit-content;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-            position: sticky;
-            top: 120px;
-        }
-
-        .sidebar h3 {
-            font-size: 17px;
-            margin-bottom: 20px;
-            color: #222;
-            font-weight: 600;
-        }
-
-        .sidebar ul {
-            list-style: none;
-        }
-
-        .sidebar li {
-            margin-bottom: 8px;
-        }
-
-        .sidebar a {
-            color: #666;
-            text-decoration: none;
-            font-size: 14px;
-            display: block;
-            padding: 10px 14px;
-            border-radius: 8px;
-            transition: all 0.3s;
-        }
-
-        .sidebar a:hover {
-            background-color: #f5f7fa;
-            color: #667eea;
-            padding-left: 18px;
-        }
-
-        .sidebar a.active {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #fff;
-            font-weight: 500;
-        }
+        .sidebar { background-color: #fff; border-radius: 12px; padding: 24px; height: fit-content; box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06); position: sticky; top: 120px; }
+        .sidebar h3 { font-size: 17px; margin-bottom: 20px; color: #222; font-weight: 600; }
+        .sidebar ul { list-style: none; }
+        .sidebar li { margin-bottom: 8px; }
+        .sidebar a { color: #666; text-decoration: none; font-size: 14px; display: block; padding: 10px 14px; border-radius: 8px; transition: all 0.3s; }
+        .sidebar a:hover { background-color: #f5f7fa; color: #667eea; padding-left: 18px; }
+        .sidebar a.active { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #fff; font-weight: 500; }
 
         /* 内容区域 */
-        .content {
-            background-color: #fff;
-            border-radius: 12px;
-            padding: 48px;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-            min-height: 600px;
-        }
-
-        .content[contenteditable="true"] {
-            outline: 2px dashed #667eea;
-            outline-offset: -2px;
-        }
-
-        .content h1 {
-            font-size: 36px;
-            margin-bottom: 12px;
-            color: #1a1a1a;
-            font-weight: 700;
-        }
-
-        .content .subtitle {
-            color: #666;
-            font-size: 15px;
-            margin-bottom: 32px;
-            padding-bottom: 20px;
-            border-bottom: 2px solid #f0f0f0;
-        }
-
-        .content h2 {
-            font-size: 26px;
-            margin-top: 40px;
-            margin-bottom: 20px;
-            color: #222;
-            font-weight: 600;
-            border-left: 4px solid #667eea;
-            padding-left: 16px;
-        }
-
-        .content h2:first-of-type {
-            margin-top: 24px;
-        }
-
-        .content h3 {
-            font-size: 20px;
-            margin-top: 28px;
-            margin-bottom: 14px;
-            color: #333;
-            font-weight: 600;
-        }
-
-        .content p {
-            margin-bottom: 18px;
-            font-size: 15px;
-            color: #555;
-            line-height: 1.8;
-        }
-
-        .content ul, .content ol {
-            margin-left: 28px;
-            margin-bottom: 18px;
-        }
-
-        .content li {
-            margin-bottom: 10px;
-            font-size: 15px;
-            color: #555;
-            line-height: 1.8;
-        }
-
-        .content strong {
-            color: #333;
-            font-weight: 600;
-        }
+        .content { background-color: #fff; border-radius: 12px; padding: 48px; box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06); min-height: 600px; }
+        .content[contenteditable="true"] { outline: 2px dashed #667eea; outline-offset: -2px; }
+        .content h1 { font-size: 36px; margin-bottom: 12px; color: #1a1a1a; font-weight: 700; }
+        .content .subtitle { color: #666; font-size: 15px; margin-bottom: 32px; padding-bottom: 20px; border-bottom: 2px solid #f0f0f0; }
+        .content h2 { font-size: 26px; margin-top: 40px; margin-bottom: 20px; color: #222; font-weight: 600; border-left: 4px solid #667eea; padding-left: 16px; }
+        .content h2:first-of-type { margin-top: 24px; }
+        .content h3 { font-size: 20px; margin-top: 28px; margin-bottom: 14px; color: #333; font-weight: 600; }
+        .content p, .content li { margin-bottom: 18px; font-size: 15px; color: #555; line-height: 1.8; }
+        .content ul, .content ol { margin-left: 28px; margin-bottom: 18px; }
+        .content strong { color: #333; font-weight: 600; }
 
         /* 信息卡片 */
-        .info-card {
-            background: linear-gradient(135deg, #f5f7ff 0%, #e8ebff 100%);
-            border-left: 4px solid #667eea;
-            padding: 20px 24px;
-            margin: 28px 0;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.1);
-        }
-
-        .info-card h4 {
-            font-size: 16px;
-            margin-bottom: 10px;
-            color: #667eea;
-            font-weight: 600;
-        }
-
-        .info-card p {
-            margin-bottom: 0;
-            font-size: 14px;
-            color: #555;
-        }
+        .info-card { background: linear-gradient(135deg, #f5f7ff 0%, #e8ebff 100%); border-left: 4px solid #667eea; padding: 20px 24px; margin: 28px 0; border-radius: 8px; box-shadow: 0 2px 8px rgba(102, 126, 234, 0.1); }
+        .info-card h4 { font-size: 16px; margin-bottom: 10px; color: #667eea; font-weight: 600; }
+        .info-card p { margin-bottom: 0; font-size: 14px; color: #555; }
 
         /* 按钮样式 */
-        .btn {
-            display: inline-block;
-            padding: 14px 28px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #fff;
-            text-decoration: none;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 500;
-            transition: all 0.3s;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
-        }
-
-        .btn-secondary {
-            background: #fff;
-            color: #667eea;
-            border: 2px solid #667eea;
-            box-shadow: none;
-        }
-
-        .btn-secondary:hover {
-            background-color: #f5f7ff;
-        }
-
+        .btn { display: inline-block; padding: 14px 28px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #fff; text-decoration: none; border-radius: 8px; font-size: 14px; font-weight: 500; transition: all 0.3s; border: none; cursor: pointer; box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3); }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4); }
+        
         /* 表格 */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 28px 0;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-        }
+        table { width: 100%; border-collapse: collapse; margin: 28px 0; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06); }
+        th, td { padding: 14px 16px; text-align: left; border-bottom: 1px solid #f0f0f0; }
+        th { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #fff; font-weight: 600; font-size: 14px; }
+        td { font-size: 14px; color: #555; background-color: #fff; }
+        tr:hover td { background-color: #f9fafb; }
 
-        th, td {
-            padding: 14px 16px;
-            text-align: left;
-            border-bottom: 1px solid #f0f0f0;
-        }
+        /* 媒体 */
+        .content img, .content video { max-width: 100%; height: auto; border-radius: 12px; margin: 24px 0; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1); display: block; }
 
-        th {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #fff;
-            font-weight: 600;
-            font-size: 14px;
-        }
-
-        td {
-            font-size: 14px;
-            color: #555;
-            background-color: #fff;
-        }
-
-        tr:hover td {
-            background-color: #f9fafb;
-        }
-
-        /* 图片样式 */
-        .content img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 12px;
-            margin: 24px 0;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-            display: block;
-        }
-
-        /* 视频样式 */
-        .content video {
-            max-width: 100%;
-            height: auto;
-            border-radius: 12px;
-            margin: 24px 0;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-            display: block;
-        }
-
-        /* 响应式设计 */
-        @media (max-width: 1024px) {
-            .main-container {
-                grid-template-columns: 1fr;
-            }
-
-            .sidebar {
-                position: static;
-            }
-
-            nav {
-                display: none;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .content {
-                padding: 28px 20px;
-            }
-
-            .content h1 {
-                font-size: 28px;
-            }
-
-            .content h2 {
-                font-size: 22px;
-            }
-
-            .edit-toolbar {
-                top: 0;
-            }
-
-            header {
-                top: 48px;
-            }
-        }
+        /* 响应式 */
+        @media (max-width: 1024px) { .main-container { grid-template-columns: 1fr; } .sidebar { position: static; } nav { display: none; } }
+        @media (max-width: 768px) { .content { padding: 28px 20px; } .edit-toolbar { top: 0; } header { top: 48px; } }
 
         /* 页脚 */
-        footer {
-            background-color: #fff;
-            margin-top: 48px;
-            padding: 40px 32px;
-            text-align: center;
-            box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.06);
-        }
+        footer { background-color: #fff; margin-top: 48px; padding: 40px 32px; text-align: center; box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.06); }
+        footer p { color: #999; font-size: 13px; }
 
-        footer p {
-            color: #999;
-            font-size: 13px;
-        }
-
-        /* 文件上传隐藏输入 */
-        #imageInput, #videoInput {
-            display: none;
-        }
-
+        #imageInput, #videoInput { display: none; }
+        
         /* 编辑提示 */
-        .edit-hint {
-            background: #fffbea;
-            border: 1px solid #ffd666;
-            border-radius: 8px;
-            padding: 12px 16px;
-            margin-bottom: 20px;
-            color: #8c6d1f;
-            font-size: 13px;
-            display: none;
-        }
-
-        .edit-mode .edit-hint {
-            display: block;
-        }
+        .edit-hint { background: #fffbea; border: 1px solid #ffd666; border-radius: 8px; padding: 12px 16px; margin-bottom: 20px; color: #8c6d1f; font-size: 13px; display: none; }
+        .edit-mode .edit-hint { display: block; }
 
         /* Firebase 配置提示 */
-        .firebase-config-notice {
-            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-            border: 2px solid #f59e0b;
-            border-radius: 12px;
-            padding: 20px 24px;
-            margin: 20px 0;
-            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.2);
-        }
-
-        .firebase-config-notice h3 {
-            color: #92400e;
-            font-size: 18px;
-            margin-bottom: 12px;
-        }
-
-        .firebase-config-notice p {
-            color: #78350f;
-            font-size: 14px;
-            line-height: 1.6;
-        }
-
-        .firebase-config-notice code {
-            background: #fff;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: 'Courier New', monospace;
-            color: #dc2626;
-        }
+        .firebase-config-notice { background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border: 2px solid #f59e0b; border-radius: 12px; padding: 20px 24px; margin: 20px 0; box-shadow: 0 4px 12px rgba(245, 158, 11, 0.2); }
+        .firebase-config-notice h3 { color: #92400e; font-size: 18px; margin-bottom: 12px; }
+        .firebase-config-notice p { color: #78350f; font-size: 14px; line-height: 1.6; }
+        .firebase-config-notice code { background: #fff; padding: 2px 6px; border-radius: 4px; font-family: 'Courier New', monospace; color: #dc2626; }
     </style>
 </head>
 <body>
     <!-- 编辑工具栏 -->
     <div class="edit-toolbar">
-        <button onclick="toggleEditMode()" id="editModeBtn">
-            <span>✏️</span> 开启编辑模式
-        </button>
-        <button onclick="formatText('bold')">
-            <span>B</span> 加粗
-        </button>
-        <button onclick="formatText('italic')">
-            <span>I</span> 斜体
-        </button>
-        <button onclick="addHeading('h2')">
-            <span>H2</span> 标题2
-        </button>
-        <button onclick="addHeading('h3')">
-            <span>H3</span> 标题3
-        </button>
-        <button onclick="insertImage()">
-            <span>🖼️</span> 插入图片
-        </button>
-        <button onclick="insertVideo()">
-            <span>🎬</span> 插入视频
-        </button>
-        <button onclick="addInfoCard()">
-            <span>💡</span> 添加提示卡片
-        </button>
-        <button onclick="addTable()">
-            <span>📊</span> 插入表格
-        </button>
-        <button onclick="saveContent()">
-            <span>💾</span> 导出HTML
-        </button>
-        <button onclick="resetContent()">
-            <span>🔄</span> 恢复默认
-        </button>
+        <button onclick="toggleEditMode()" id="editModeBtn"><span>✏️</span> 开启编辑模式</button>
+        <button onclick="formatText('bold')"><span>B</span> 加粗</button>
+        <button onclick="formatText('italic')"><span>I</span> 斜体</button>
+        <button onclick="addHeading('h2')"><span>H2</span> 标题2</button>
+        <button onclick="addHeading('h3')"><span>H3</span> 标题3</button>
+        <button onclick="insertImage()"><span>🖼️</span> 插入图片</button>
+        <button onclick="insertVideo()"><span>🎬</span> 插入视频</button>
+        <button onclick="addInfoCard()"><span>💡</span> 添加提示卡片</button>
+        <button onclick="addTable()"><span>📊</span> 插入表格</button>
+        <button onclick="saveContent()"><span>💾</span> 导出HTML</button>
+        <button onclick="resetContent()"><span>🔄</span> 恢复默认</button>
         <div class="mode-indicator" id="modeIndicator">
             查看模式 | <span class="sync-status"><span class="sync-dot"></span><span id="syncStatus">未连接</span></span>
         </div>
     </div>
 
-    <!-- 隐藏的文件上传输入 -->
     <input type="file" id="imageInput" accept="image/*" onchange="handleImageUpload(event)">
     <input type="file" id="videoInput" accept="video/*" onchange="handleVideoUpload(event)">
 
@@ -579,18 +183,15 @@
 
             <div class="firebase-config-notice" id="configNotice">
                 <h3>🔥 Firebase 配置说明</h3>
-                <p><strong>当前状态：</strong>需要配置 Firebase 才能启用云端同步功能</p>
+                <p><strong>当前状态：</strong>需要配置 Firebase 才能可用云端同步功能</p>
                 <p style="margin-top: 12px;"><strong>配置步骤：</strong></p>
                 <ol style="margin-left: 20px; margin-top: 8px;">
                     <li>访问 <a href="https://console.firebase.google.com" target="_blank" style="color: #2563eb; text-decoration: underline;">Firebase Console</a></li>
                     <li>创建新项目（或使用现有项目）</li>
                     <li>在项目设置中找到 <code>firebaseConfig</code></li>
                     <li>复制配置对象，替换下方脚本中的配置</li>
-                    <li>启用 Realtime Database（测试模式即可）</li>
+                    <li>启用 Realtime Database（测试模式开启）</li>
                 </ol>
-                <p style="margin-top: 12px; font-size: 12px; color: #92400e;">
-                    💡 提示：Firebase 免费套餐完全够用，无需付费。配置后所有设备将实时同步！
-                </p>
             </div>
 
             <h2 id="overview">功能特性</h2>
@@ -605,23 +206,10 @@
             </ul>
 
             <h2 id="firebase-setup">Firebase 配置教程</h2>
-
             <h3>1. 创建 Firebase 项目</h3>
-            <p>访问 <a href="https://console.firebase.google.com" target="_blank">Firebase Console</a>，点击"添加项目"，按照提示完成创建。</p>
-
+            <p>访问 Firebase Console，点击"添加项目"，按照提示完成创建。</p>
             <h3>2. 获取配置信息</h3>
             <p>在项目概览页面，点击网页图标 (</>)，复制 firebaseConfig 配置对象。</p>
-
-            <h3>3. 启用 Realtime Database</h3>
-            <p>在左侧菜单选择 "Realtime Database"，点击"创建数据库"，选择"测试模式"即可。</p>
-
-            <div class="info-card">
-                <h4>⚠️ 重要提示</h4>
-                <p>测试模式下数据库对所有人开放。正式使用时，请在 Firebase 控制台配置安全规则。</p>
-            </div>
-
-            <h3>4. 替换配置代码</h3>
-            <p>找到本页面底部的 JavaScript 代码，将 <code>firebaseConfig</code> 对象替换为您的配置。</p>
 
             <h2 id="specs">使用说明</h2>
             <table>
@@ -640,32 +228,14 @@
                         <td>实时更新</td>
                         <td>其他设备的修改会立即显示</td>
                     </tr>
-                    <tr>
-                        <td>离线编辑</td>
-                        <td>断网也可编辑，联网后自动同步</td>
-                    </tr>
-                    <tr>
-                        <td>同步状态</td>
-                        <td>工具栏显示连接和同步状态</td>
-                    </tr>
                 </tbody>
             </table>
-
-            <h2 id="setup">开始使用</h2>
-            <ol>
-                <li>完成上述 Firebase 配置</li>
-                <li>刷新页面，查看同步状态变为"已连接"</li>
-                <li>开启编辑模式，开始编辑内容</li>
-                <li>在其他设备打开相同页面，即可看到实时同步</li>
-            </ol>
-
             <p>
                 <a href="#" class="btn" onclick="alert('请先完成 Firebase 配置'); return false;">开始配置</a>
             </p>
         </main>
     </div>
 
-    <!-- 页脚 -->
     <footer>
         <p>&copy; 2024 Soundcore. All Rights Reserved. | 云端同步版本 v1.0</p>
     </footer>
@@ -676,19 +246,20 @@
 
     <script>
         // ============================================
-        // Firebase 配置区域 - 请替换为您的配置
+        // Firebase 配置区域 - 这里的 Key 是示例，如果是你自己的项目请替换
         // ============================================
-        const firebaseConfig = { apiKey: "AIzaSyCaytyZix2KpGjDIB0Q54QVRRMq_G1N72E",
-        authDomain: "soundcore-sync.firebaseapp.com",
-        projectId: "soundcore-sync",
-        storageBucket: "soundcore-sync.firebasestorage.app",
-        messagingSenderId: "729835191028",
-        appId: "1:729835191028:web:b9bd034acc6d0ae399bca1",
-        measurementId: "G-S7ZLFZJLTS"
+        const firebaseConfig = { 
+            apiKey: "AIzaSyCaytyZix2KpGjDIB0Q54QVRRMq_G1N72E",
+            authDomain: "soundcore-sync.firebaseapp.com",
+            projectId: "soundcore-sync",
+            storageBucket: "soundcore-sync.firebasestorage.app",
+            messagingSenderId: "729835191028",
+            appId: "1:729835191028:web:b9bd034acc6d0ae399bca1",
+            measurementId: "G-S7ZLFZJLTS"
         };
 
         // ============================================
-        // 应用逻辑 - 无需修改
+        // 应用逻辑
         // ============================================
         let isEditMode = false;
         let isFirebaseConfigured = false;
@@ -699,34 +270,26 @@
 
         const content = document.getElementById('editableContent');
         const editModeBtn = document.getElementById('editModeBtn');
-        const modeIndicator = document.getElementById('modeIndicator');
         const syncStatus = document.getElementById('syncStatus');
         const STORAGE_KEY = 'soundcore_page_content_backup';
         const DEFAULT_CONTENT_KEY = 'soundcore_default_content';
 
-        // 检查 Firebase 配置
         function checkFirebaseConfig() {
-            return firebaseConfig.apiKey !== "YOUR_API_KEY" &&
-                   firebaseConfig.databaseURL &&
-                   !firebaseConfig.databaseURL.includes('YOUR_PROJECT_ID');
+            return firebaseConfig.apiKey !== "YOUR_API_KEY";
         }
 
-        // 初始化 Firebase
         function initFirebase() {
             if (!checkFirebaseConfig()) {
                 console.warn('Firebase 未配置，使用本地存储模式');
-                syncStatus.textContent = '未配置';
-                syncStatus.parentElement.querySelector('.sync-dot').style.backgroundColor = '#fbbf24';
+                syncStatus.textContent = '本地模式';
                 return false;
             }
-
             try {
                 firebase.initializeApp(firebaseConfig);
                 database = firebase.database();
                 contentRef = database.ref('soundcore/content');
                 isFirebaseConfigured = true;
 
-                // 监听远程数据变化
                 contentRef.on('value', (snapshot) => {
                     const data = snapshot.val();
                     if (data && data.html && !isSyncing) {
@@ -735,7 +298,6 @@
                     }
                 });
 
-                // 监听连接状态
                 const connectedRef = database.ref('.info/connected');
                 connectedRef.on('value', (snapshot) => {
                     if (snapshot.val() === true) {
@@ -747,125 +309,85 @@
                         syncStatus.parentElement.querySelector('.sync-dot').style.backgroundColor = '#f87171';
                     }
                 });
-
-                console.log('Firebase 初始化成功');
                 return true;
             } catch (error) {
                 console.error('Firebase 初始化失败:', error);
                 syncStatus.textContent = '配置错误';
-                syncStatus.parentElement.querySelector('.sync-dot').style.backgroundColor = '#f87171';
                 return false;
             }
         }
 
-        // 页面加载时初始化
         window.addEventListener('DOMContentLoaded', function() {
-            // 保存默认内容
             if (!localStorage.getItem(DEFAULT_CONTENT_KEY)) {
                 localStorage.setItem(DEFAULT_CONTENT_KEY, content.innerHTML);
             }
-
-            // 初始化 Firebase
             initFirebase();
-
-            // 如果 Firebase 未配置，从本地存储加载
             if (!isFirebaseConfigured) {
                 const savedContent = localStorage.getItem(STORAGE_KEY);
                 if (savedContent) {
                     content.innerHTML = savedContent;
-                    console.log('已从本地存储加载内容');
                 }
             }
         });
 
-        // 同步到云端
         function syncToCloud() {
             if (!isFirebaseConfigured || !contentRef) {
-                // 降级到本地存储
                 localStorage.setItem(STORAGE_KEY, content.innerHTML);
                 return;
             }
-
             clearTimeout(autoSaveTimer);
             syncStatus.textContent = '同步中...';
-
             autoSaveTimer = setTimeout(() => {
                 isSyncing = true;
                 contentRef.set({
                     html: content.innerHTML,
                     timestamp: Date.now()
-                })
-                .then(() => {
+                }).then(() => {
                     syncStatus.textContent = '已同步';
-                    // 同时保存到本地作为备份
                     localStorage.setItem(STORAGE_KEY, content.innerHTML);
-                    console.log('内容已同步到云端', new Date().toLocaleTimeString());
-                    setTimeout(() => {
-                        isSyncing = false;
-                        syncStatus.textContent = '已连接';
-                    }, 500);
-                })
-                .catch((error) => {
-                    console.error('同步失败:', error);
+                    setTimeout(() => { isSyncing = false; syncStatus.textContent = '已连接'; }, 500);
+                }).catch((error) => {
                     syncStatus.textContent = '同步失败';
-                    syncStatus.parentElement.querySelector('.sync-dot').style.backgroundColor = '#f87171';
                     isSyncing = false;
-                    // 失败时保存到本地
                     localStorage.setItem(STORAGE_KEY, content.innerHTML);
                 });
             }, 1000);
         }
 
-        // 监听内容变化
         content.addEventListener('input', syncToCloud);
         content.addEventListener('DOMSubtreeModified', function(e) {
-            // 避免同步触发的变化再次同步
-            if (!isSyncing) {
-                syncToCloud();
-            }
+            if (!isSyncing) syncToCloud();
         });
 
-        // 切换编辑模式
         function toggleEditMode() {
             isEditMode = !isEditMode;
             content.contentEditable = isEditMode;
-
             if (isEditMode) {
                 document.body.classList.add('edit-mode');
                 editModeBtn.innerHTML = '<span>👁️</span> 退出编辑';
             } else {
                 document.body.classList.remove('edit-mode');
-                editModeBtn.innerHTML = '<span>✏️</span> 开启编辑';
+                editModeBtn.innerHTML = '<span>✏️</span> 开启编辑模式';
             }
         }
 
-        // 恢复默认内容
         function resetContent() {
-            if (confirm('确定要恢复到默认内容吗？当前的修改将会丢失，且会同步到所有设备。')) {
+            if (confirm('确定要恢复到默认内容吗？当前的修改将会丢失。')) {
                 const defaultContent = localStorage.getItem(DEFAULT_CONTENT_KEY);
                 if (defaultContent) {
                     content.innerHTML = defaultContent;
                     syncToCloud();
-                    alert('已恢复到默认内容');
                 }
             }
         }
 
-        // 文本格式化
         function formatText(command) {
-            if (!isEditMode) {
-                alert('请先开启编辑模式');
-                return;
-            }
+            if (!isEditMode) return alert('请先开启编辑模式');
             document.execCommand(command, false, null);
         }
-
-        // 添加标题
+        
         function addHeading(tag) {
-            if (!isEditMode) {
-                alert('请先开启编辑模式');
-                return;
-            }
+            if (!isEditMode) return alert('请先开启编辑模式');
             const selection = window.getSelection();
             if (selection.rangeCount > 0) {
                 const range = selection.getRangeAt(0);
@@ -877,16 +399,7 @@
             }
         }
 
-        // 插入图片
-        function insertImage() {
-            if (!isEditMode) {
-                alert('请先开启编辑模式');
-                return;
-            }
-            document.getElementById('imageInput').click();
-        }
-
-        // 处理图片上传
+        function insertImage() { if (!isEditMode) return alert('请先开启编辑模式'); document.getElementById('imageInput').click(); }
         function handleImageUpload(event) {
             const file = event.target.files[0];
             if (file) {
@@ -894,9 +407,6 @@
                 reader.onload = function(e) {
                     const img = document.createElement('img');
                     img.src = e.target.result;
-                    img.style.maxWidth = '100%';
-                    img.style.borderRadius = '12px';
-                    img.style.margin = '24px 0';
                     content.appendChild(img);
                     syncToCloud();
                 };
@@ -904,42 +414,14 @@
             }
         }
 
-        // 插入视频
-        function insertVideo() {
-            if (!isEditMode) {
-                alert('请先开启编辑模式');
-                return;
-            }
-            const choice = confirm('点击"确定"上传本地视频，点击"取消"插入视频链接');
-            if (choice) {
-                document.getElementById('videoInput').click();
-            } else {
-                const url = prompt('请输入视频URL (支持 MP4, WebM):');
-                if (url) {
-                    const video = document.createElement('video');
-                    video.src = url;
-                    video.controls = true;
-                    video.style.maxWidth = '100%';
-                    video.style.borderRadius = '12px';
-                    video.style.margin = '24px 0';
-                    content.appendChild(video);
-                    syncToCloud();
-                }
-            }
-        }
-
-        // 处理视频上传
+        function insertVideo() { if (!isEditMode) return alert('请先开启编辑模式'); document.getElementById('videoInput').click(); }
         function handleVideoUpload(event) {
             const file = event.target.files[0];
             if (file) {
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     const video = document.createElement('video');
-                    video.src = e.target.result;
-                    video.controls = true;
-                    video.style.maxWidth = '100%';
-                    video.style.borderRadius = '12px';
-                    video.style.margin = '24px 0';
+                    video.src = e.target.result; video.controls = true;
                     content.appendChild(video);
                     syncToCloud();
                 };
@@ -947,99 +429,47 @@
             }
         }
 
-        // 添加信息卡片
         function addInfoCard() {
-            if (!isEditMode) {
-                alert('请先开启编辑模式');
-                return;
-            }
+            if (!isEditMode) return alert('请先开启编辑模式');
             const card = document.createElement('div');
             card.className = 'info-card';
-            card.innerHTML = `
-                <h4>💡 提示标题</h4>
-                <p>在这里输入提示内容...</p>
-            `;
+            card.innerHTML = '<h4>💡 提示标题</h4><p>在这里输入提示内容...</p>';
             content.appendChild(card);
             syncToCloud();
         }
 
-        // 添加表格
         function addTable() {
-            if (!isEditMode) {
-                alert('请先开启编辑模式');
-                return;
-            }
+            if (!isEditMode) return alert('请先开启编辑模式');
             const table = document.createElement('table');
-            table.innerHTML = `
-                <thead>
-                    <tr>
-                        <th>列1</th>
-                        <th>列2</th>
-                        <th>列3</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>数据1</td>
-                        <td>数据2</td>
-                        <td>数据3</td>
-                    </tr>
-                    <tr>
-                        <td>数据4</td>
-                        <td>数据5</td>
-                        <td>数据6</td>
-                    </tr>
-                </tbody>
-            `;
+            table.innerHTML = '<thead><tr><th>列1</th><th>列2</th></tr></thead><tbody><tr><td>数据1</td><td>数据2</td></tr></tbody>';
             content.appendChild(table);
             syncToCloud();
         }
 
-        // 导出HTML文件
         function saveContent() {
             const htmlContent = content.innerHTML;
             const blob = new Blob([htmlContent], { type: 'text/html' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
-            a.href = url;
-            a.download = 'soundcore_content_' + new Date().getTime() + '.html';
-            a.click();
-            URL.revokeObjectURL(url);
-            alert('内容已导出为HTML文件！');
+            a.href = url; a.download = 'soundcore_content.html';
+            a.click(); URL.revokeObjectURL(url);
         }
-
-        // 侧边栏导航平滑滚动
-        document.querySelectorAll('.sidebar a').forEach(anchor => {
+        
+        // 侧边栏导航
+         document.querySelectorAll('.sidebar a').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href').substring(1);
-                const targetElement = document.getElementById(targetId);
-                if (targetElement) {
-                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    document.querySelectorAll('.sidebar a').forEach(a => a.classList.remove('active'));
-                    this.classList.add('active');
+                const href = this.getAttribute('href');
+                if(href.startsWith('#')) {
+                    e.preventDefault();
+                    const targetId = href.substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        document.querySelectorAll('.sidebar a').forEach(a => a.classList.remove('active'));
+                        this.classList.add('active');
+                    }
                 }
             });
-        });
-
-        // 键盘快捷键
-        document.addEventListener('keydown', function(e) {
-            if (e.ctrlKey || e.metaKey) {
-                switch(e.key) {
-                    case 's':
-                        e.preventDefault();
-                        saveContent();
-                        break;
-                    case 'b':
-                        e.preventDefault();
-                        formatText('bold');
-                        break;
-                    case 'i':
-                        e.preventDefault();
-                        formatText('italic');
-                        break;
-                }
-            }
         });
     </script>
 </body>
