@@ -678,15 +678,14 @@
         // ============================================
         // Firebase 配置区域 - 请替换为您的配置
         // ============================================
-        const firebaseConfig = {
-  apiKey: "AIzaSyCaytyZix2KpGjDIB0Q54QVRRMq_G1N72E",
-  authDomain: "soundcore-sync.firebaseapp.com",
-  projectId: "soundcore-sync",
-  storageBucket: "soundcore-sync.firebasestorage.app",
-  messagingSenderId: "729835191028",
-  appId: "1:729835191028:web:b9bd034acc6d0ae399bca1",
-  measurementId: "G-S7ZLFZJLTS"
-};
+        const firebaseConfig = { apiKey: "AIzaSyCaytyZix2KpGjDIB0Q54QVRRMq_G1N72E",
+        authDomain: "soundcore-sync.firebaseapp.com",
+        projectId: "soundcore-sync",
+        storageBucket: "soundcore-sync.firebasestorage.app",
+        messagingSenderId: "729835191028",
+        appId: "1:729835191028:web:b9bd034acc6d0ae399bca1",
+        measurementId: "G-S7ZLFZJLTS"
+        };
 
         // ============================================
         // 应用逻辑 - 无需修改
