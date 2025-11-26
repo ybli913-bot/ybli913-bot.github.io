@@ -123,81 +123,95 @@
             font-weight: 400;
         }
 
-        .edit-toolbar button:hover {
-            background-color: rgba(255, 255, 255, 0.3);
-            transform: translateY(-1px);
-        }
-
-        .edit-toolbar button:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        .edit-toolbar .mode-indicator {
-            margin-left: auto;
-            color: #fff;
-            font-size: 13px;
-            padding: 8px 16px;
-            background-color: rgba(255, 255, 255, 0.2);
-            border-radius: 6px;
-        }
-
-        .sync-status {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .sync-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background-color: #4ade80;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-
-        /* 头部导航 */
-        header {
-            background-color: #fff;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-            position: sticky;
-            top: 48px;
-            z-index: 1000;
-        }
-
-        .header-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 16px 32px;
+        nav {
             display: flex;
-            align-items: center;
-            justify-content: space-between;
+            gap: 32px;
         }
 
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .logo-text {
-            font-size: 26px;
-            font-weight: 700;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .logo-sub {
-            font-size: 13px;
+        nav a {
             color: #666;
-            font-weight: 400;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+            padding: 8px 12px;
+            border-radius: 4px;
+        }
+
+        nav a:hover {
+            color: #667eea;
+            background-color: #f5f7fa;
+        }
+
+        /* 主要内容区 */
+        .main-container {
+            max-width: 1400px;
+            margin: 32px auto;
+            padding: 0 32px;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 32px;
+        }
+
+        /* 侧边栏 */
+        .sidebar {
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 24px;
+            height: fit-content;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+            position: sticky;
+            top: 120px;
+        }
+
+        .sidebar h3 {
+            font-size: 17px;
+            margin-bottom: 20px;
+            color: #222;
+            font-weight: 600;
+        }
+
+        .sidebar ul {
+            list-style: none;
+        }
+
+        .sidebar li {
+            margin-bottom: 8px;
+        }
+
+        .sidebar a {
+            color: #666;
+            text-decoration: none;
+            font-size: 14px;
+            display: block;
+            padding: 10px 14px;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .sidebar a:hover {
+            background-color: #f5f7fa;
+            color: #667eea;
+            padding-left: 18px;
+        }
+
+        .sidebar a.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            font-weight: 500;
+        }
+
+        /* 内容区域 */
+        .content {
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 48px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+            min-height: 600px;
+        }
+
+        .content[contenteditable="true"] {
+            outline: 2px dashed #667eea;
+            outline-offset: -2px;
         }
 
         .content h1 {
@@ -289,7 +303,7 @@
             display: inline-block;
             padding: 14px 28px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: #fff;
+            color: #fff;
             text-decoration: none;
             border-radius: 8px;
             font-size: 14px;
@@ -436,262 +450,6 @@
             font-size: 13px;
             display: none;
         }
-      color: #fff;
-            text-decoration: none;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 500;
-            transition: all 0.3s;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
-        }
-
-        .btn-secondary {
-            background: #fff;
-            color: #667eea;
-            border: 2px solid #667eea;
-            box-shadow: none;
-        }
-
-        .btn-secondary:hover {
-            background-color: #f5f7ff;
-        }
-
-        /* 表格 */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 28px 0;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-        }
-
-        th, td {
-            padding: 14px 16px;
-            text-align: left;
-            border-bottom: 1px solid #f0f0f0;
-        }
-
-        th {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #fff;
-            font-weight: 600;
-            font-size: 14px;
-        }
-
-        td {
-            font-size: 14px;
-            color: #555;
-            background-color: #fff;
-        }
-
-        tr:hover td {
-            background-color: #f9fafb;
-        }
-
-        /* 图片样式 */
-        .content img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 12px;
-            margin: 24px 0;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-            display: block;
-        }
-
-        /* 视频样式 */
-        .content video {
-            max-width: 100%;
-            height: auto;
-            border-radius: 12px;
-            margin: 24px 0;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-            display: block;
-        }
-
-        /* 响应式设计 */
-        @media (max-width: 1024px) {
-            .main-container {
-                grid-template-columns: 1fr;
-            }
-
-            .sidebar {
-                position: static;
-            }
-
-            nav {
-                display: none;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .content {
-                padding: 28px 20px;
-            }
-
-            .content h1 {
-                font-size: 28px;
-            }
-
-            .content h2 {
-                font-size: 22px;
-            }
-
-            .edit-toolbar {
-                top: 0;
-            }
-
-            header {
-                top: 48px;
-            }
-        }
-
-        /* 页脚 */
-        footer {
-            background-color: #fff;
-            margin-top: 48px;
-            padding: 40px 32px;
-            text-align: center;
-            box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.06);
-        }
-
-        footer p {
-            color: #999;
-            font-size: 13px;
-        }
-
-        /* 文件上传隐藏输入 */
-        #imageInput, #videoInput {
-            display: none;
-        }
-
-        /* 编辑提示 */
-        .edit-hint {
-            background: #fffbea;
-            border: 1px solid #ffd666;
-            border-radius: 8px;
-            padding: 12px 16px;
-            margin-bottom: 20px;
-            color: #8c6d1f;
-            font-size: 13px;
-            display: none;
-        }
-
-        .edit-mode .edit-hint {
-            display: block;
-        }
-
-        /* Firebase 配置提示 */
-        .firebase-config-notice {
-            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-            border: 2px solid #f59e0b;
-            border-radius: 12px;
-            padding: 20px 24px;
-            margin: 20px 0;
-            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.2);
-        }
-
-        .firebase-config-notice h3 {
-            color: #92400e;
-            font-size: 18px;
-            margin-bottom: 12px;
-        }
-
-        .firebase-config-notice p {
-            color: #78350f;
-            font-size: 14px;
-            line-height: 1.6;
-        }
-
-        .firebase-config-notice code {
-            background: #fff;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: 'Courier New', monospace;
-            color: #dc2626;
-        }
-    </style>
-</head>
-<body>
-    <!-- 编辑工具栏 -->
-    <div class="edit-toolbar">
-        <button onclick="toggleEditMode()" id="editModeBtn">
-            <span>✏️</span> 开启编辑模式
-        </button>
-        <button onclick="formatText('bold')">
-            <span>B</span> 加粗
-        </button>
-        <button onclick="formatText('italic')">
-            <span>I</span> 斜体
-        </button>
-        <button onclick="addHeading('h2')">
-            <span>H2</span> 标题2
-        </button>
-        <button onclick="addHeading('h3')">
-            <span>H3</span> 标题3
-        </button>
-        <button onclick="insertImage()">
-            <span>🖼️</span> 插入图片
-        </button>
-        <button onclick="insertVideo()">
-            <span>🎬</span> 插入视频
-        </button>
-        <button onclick="addInfoCard()">
-            <span>💡</span> 添加提示卡片
-        </button>
-        <button onclick="addTable()">
-            <span>📊</span> 插入表格
-        </button>
-        <button onclick="saveContent()">
-            <span>💾</span> 导出HTML
-        </button>
-        <button onclick="resetContent()">
-            <span>🔄</span> 恢复默认
-        </button>
-        <div class="mode-indicator" id="modeIndicator">
-            查看模式 | <span class="sync-status"><span class="sync-dot"></span><span id="syncStatus">未连接</span></span>
-        </div>
-    </div>
-
-    <!-- 隐藏的文件上传输入 -->
-    <input type="file" id="imageInput" accept="image/*" onchange="handleImageUpload(event)">
-    <input type="file" id="videoInput" accept="video/*" onchange="handleVideoUpload(event)">
-
-    <!-- 头部导航 -->
-    <header>
-        <div class="header-container">
-            <div class="logo">
-                <div>
-                    <div class="logo-text">soundcore</div>
-                    <div class="logo-sub">Support Center - Cloud Sync</div>
-                </div>
-            </div>
-            <nav>
-                <a href="#">支持中心</a>
-                <a href="#">产品手册</a>
-                <a href="#">下载中心</a>
-                <a href="#">常见问题</a>
-                <a href="#">联系我们</a>
-            </nav>
-        </div>
-    </header>
-
-    <!-- 主要内容 -->
-    <div class="main-container">
-        <!-- 侧边栏 -->
-        <aside class="sidebar">
-            <h3>产品手册导航</h3>
-            <ul>
-                <li><a href="#overview" class="active">产品概述</a></li>
-                <li><a href="#firebase-setup">Firebase 配置</a></li>
-                <li><a href="#specs">技术规格</a></li>
 
         .edit-mode .edit-hint {
             display: block;
@@ -881,7 +639,6 @@
                     <tr>
                         <td>实时更新</td>
                         <td>其他设备的修改会立即显示</td>
-
                     </tr>
                     <tr>
                         <td>离线编辑</td>
@@ -922,16 +679,14 @@
         // Firebase 配置区域 - 请替换为您的配置
         // ============================================
         const firebaseConfig = {
-            // 👇 请替换为您的 Firebase 配置
-            apiKey: "AIzaSyCaytyZix2KpGjDIB0Q54QVRRMq_G1N72E",
-            authDomain: "soundcore-sync.firebaseapp.com",
-            databaseURL: "https://soundcore-sync-default-rtdb.firebaseio.com",
-            projectId: "soundcore-sync",
-            storageBucket: "soundcore-sync.appspot.com",
-            messagingSenderId: "729835191028",
-            appId: "1:729835191028:web:b9bd034acc6d0ae399bca1"
-            // 👆 请替换为您的 Firebase 配置
-        };
+  apiKey: "AIzaSyCaytyZix2KpGjDIB0Q54QVRRMq_G1N72E",
+  authDomain: "soundcore-sync.firebaseapp.com",
+  projectId: "soundcore-sync",
+  storageBucket: "soundcore-sync.firebasestorage.app",
+  messagingSenderId: "729835191028",
+  appId: "1:729835191028:web:b9bd034acc6d0ae399bca1",
+  measurementId: "G-S7ZLFZJLTS"
+};
 
         // ============================================
         // 应用逻辑 - 无需修改
@@ -1133,8 +888,7 @@
         }
 
         // 处理图片上传
-        function handleImageUpload(event)
-{
+        function handleImageUpload(event) {
             const file = event.target.files[0];
             if (file) {
                 const reader = new FileReader();
@@ -1176,8 +930,7 @@
         }
 
         // 处理视频上传
-        function handleVideoUpload(event) 
-{
+        function handleVideoUpload(event) {
             const file = event.target.files[0];
             if (file) {
                 const reader = new FileReader();
@@ -1292,5 +1045,3 @@
     </script>
 </body>
 </html>
-
-
