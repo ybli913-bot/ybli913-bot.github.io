@@ -245,12 +245,14 @@
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
 
     <script>
+                // ============================================
+        // Firebase 配置区域 - 已替换为你自己的配置
         // ============================================
-        // Firebase 配置区域 - 这里的 Key 是示例，如果是你自己的项目请替换
-        // ============================================
-        const firebaseConfig = { 
+        const firebaseConfig = {
             apiKey: "AIzaSyCaytyZix2KpGjDIB0Q54QVRRMq_G1N72E",
             authDomain: "soundcore-sync.firebaseapp.com",
+            // 下面这一行是你之前的截图里找到的，非常重要！
+            databaseURL: "https://soundcore-sync-default-rtdb.asia-southeast1.firebasedatabase.app",
             projectId: "soundcore-sync",
             storageBucket: "soundcore-sync.firebasestorage.app",
             messagingSenderId: "729835191028",
